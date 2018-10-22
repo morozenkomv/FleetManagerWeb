@@ -1411,7 +1411,7 @@ hr {
 /* Begin Horizontal menu */
 /* Begin Left Sidebar Collapsed */
 .left-side-collapsed .navbar-static-side {
-    width: 85px;
+    width: 55px;
 }
 
     .left-side-collapsed .navbar-static-side ul#side-menu li.user-panel {
