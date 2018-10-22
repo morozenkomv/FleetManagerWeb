@@ -1,0 +1,89 @@
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isAdd = Convert.ToBoolean(ViewData["blAddRights"]);
+    bool isEdit = Convert.ToBoolean(ViewData["blEditRights"]);
+    bool isDelete = Convert.ToBoolean(ViewData["blDeleteRights"]);
+    bool isExport = Convert.ToBoolean(ViewData["blExportRights"]);
+}
+@using (Html.BeginForm("User", "User", FormMethod.Post, new { @id = "frmUser", @class = "form_validation_ttip well stdform" }))
+{
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        @Html.Hidden("hfAdd", @isAdd)
+        @Html.Hidden("hfEdit", @isEdit)
+        @Html.Hidden("hfDelete", @isDelete)
+        @Html.Hidden("hfExport", @isExport)
+        @Html.Hidden("hUserId", FleetManagerWeb.Common.mySession.Current.UserId)
+        @Html.Hidden("hRoleId", FleetManagerWeb.Common.mySession.Current.RoleId)
+
+        <div class="panel-body pan">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <div class="row search-label">
+                        <label class="control-label col-md-3">
+                            Search
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" id="txtUserSearch" class="form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 text-right">
+                    <label class="control-label">
+                        &nbsp;
+                    </label>
+                    @if (isAdd)
+                    {
+                        @Html.ActionLink("Add New User", "User", "User", null, new { @class = "btn btn-primary" })
+                    }
+                    @if (isDelete)
+                    {
+                        <input class="btn btn-danger" id="btnDeleteUser" name="inputDelete" type="button" value="Delete User" tabindex="3" title='Delete User' />
+                    }
+                    @if (isExport)
+                    {
+                        <input class="btn btn-danger" id="btnExportPdf" name="inputExportPDF" type="button" value="Export to PDF" tabindex="4" title='Export to PDF' />
+                        <input class="btn btn-danger" id="btnExportCsv" name="inputExportCsv" type="button" value="Export to CSV" tabindex="5" title='Export to CSV' />
+                    }
+                </div>
+            </div>
+            <div class="span12 user-contant">
+                <div id="dvUser">
+                    <table id="tblUser"></table>
+                    <div id="dvUserFooter"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="companyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="panel panel-grey">
+                    <h5 class="modal-title panel-heading" id="companyModalLabel">
+                        <span id="spnusername"></span>'s Company List
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color:white;">&times;</span>
+                        </button>
+                    </h5>
+                </div>
+
+                <div class="modal-body">
+                    <div id="dvCompany">
+                        <table id="tblCompany"></table>
+                        <div id="dvCompanyFooter"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    var AdminRoleID = '@FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.ADMIN.GetHashCode()';
+    var SysAdminRoleID = '@FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.SYSADMIN.GetHashCode()';
+</script>
+<script src="~/Scripts/Utility/UserView.js?v=@DateTime.Now.Ticks"></script>

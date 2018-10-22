@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FleetManager" Class="OrderDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=NISHANT\SQL2016EXPRESS;Initial Catalog=FleetManager;Integrated Security=True;Pooling=False;Asynchronous Processing=True;MultipleActiveResultSets=False;Application Name=FleetManager" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FleetManagerConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[Order]" Member="Orders">
+    <Type Name="Order">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="OrderCategoryId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="UpdatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="DeletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeletedBy" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.DeleteOrder" Method="DeleteOrder">
+    <Parameter Name="IdList" Parameter="idList" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="DeletedBy" Parameter="deletedBy" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="PageId" Parameter="pageId" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="DeleteOrderResult">
+      <Column Name="TotalReference" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SearchOrder" Method="SearchOrder">
+    <Parameter Name="Rows" Parameter="rows" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Page" Parameter="page" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Sort" Parameter="sort" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Search" Parameter="search" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="SearchOrderResult">
+      <Column Name="RowNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="OrderCategory" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.InsertOrUpdateOrder" Method="InsertOrUpdateOrder">
+    <Parameter Name="Id" Parameter="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="OrderCategoryId" Parameter="orderCategoryId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="AssignedUserId" Parameter="assignedUserId" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="PageId" Parameter="pageId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="InsertOrUpdateOrderResult">
+      <Column Name="InsertedId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetOrderById" Method="GetOrderById">
+    <Parameter Name="Id" Parameter="id" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="GetOrderByIdResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="OrderCategoryId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="OrderCategory" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="UserIds" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

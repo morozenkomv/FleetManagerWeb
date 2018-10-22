@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.125" name="User">
+  <DataContextMoniker Name="/UserDataContext" />
+  <nestedChildShapes>
+    <classShape Id="898991f1-8e39-4f90-96ef-803978856740" absoluteBounds="5.75, 3.25, 2, 5.6169254557291657">
+      <DataClassMoniker Name="/UserDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ff469493-3e5c-4a63-ab7f-e0744ba5ce8a" absoluteBounds="5.765, 3.71, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="150d1335-6584-48b1-8637-cdc798f092d0" absoluteBounds="2.625, 1.875, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/UserDataContext/ActivityLog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="77f393c0-4bdf-4c35-9d36-94bc292747cb" absoluteBounds="2.6399999999999997, 2.335, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.75 : 4.31330485026042); (4.625 : 4.31330485026042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/UserDataContext/User/User_ActivityLog" />
+      <nodes>
+        <classShapeMoniker Id="898991f1-8e39-4f90-96ef-803978856740" />
+        <classShapeMoniker Id="150d1335-6584-48b1-8637-cdc798f092d0" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

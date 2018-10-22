@@ -1,0 +1,124 @@
+@{
+    ViewBag.Title = "Tracker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isAdd = Convert.ToBoolean(ViewData["blAddRights"]);
+    bool isEdit = Convert.ToBoolean(ViewData["blEditRights"]);
+    bool isDelete = Convert.ToBoolean(ViewData["blDeleteRights"]);
+    bool isExport = Convert.ToBoolean(ViewData["blExportRights"]);
+
+    int UserRoleID = Convert.ToInt32(ViewData["UserRoleID"]);
+    int SYSAdminRoleID = FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.SYSADMIN.GetHashCode();
+    int AdminRoleID = FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.ADMIN.GetHashCode();
+}
+@using (Html.BeginForm("Tracker", "Tracker", FormMethod.Post, new { @id = "frmTracker", @class = "form_validation_ttip well stdform" }))
+{
+
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        @Html.Hidden("hfAdd", @isAdd)
+        @Html.Hidden("hfEdit", @isEdit)
+        @Html.Hidden("hfDelete", @isDelete)
+        @Html.Hidden("hfExport", @isExport)
+        @Html.Hidden("UserRoleID", UserRoleID)
+        @Html.Hidden("SYSAdminRoleID", SYSAdminRoleID)
+        @Html.Hidden("AdminRoleID", AdminRoleID)
+        <div class="panel-body pan">
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Trip Start
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="txtTripStartDateSearch" class="date form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Trip End
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="txtTripEndDateSearch" class="date form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Location Start
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="txtLocationStartSearch" class="alphanumwithspc form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Location End
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="txtLocationEndSearch" class="alphanumwithspc form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Search
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="txtUserSearch" class="alphanumwithspc form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+
+                        </label>
+                        <div class="col-md-8">
+                            <input class="btn btn-primary" id="btnSearchTracker" name="inputSearch" type="button" value="Search Tracker" tabindex="3" title='Search Tracker' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-9 text-right">
+                    <label class="control-label">
+                        &nbsp;
+                    </label>
+                    <input class="btn btn-primary print" id="btnPrint" name="btnPrint" type="button" value="Print" title="Print Data Range" />
+                    @Html.ActionLink("Print Formatted", "TrackerFormattedPrint", "Tracker", null, new { @class = "btn btn-primary" })
+                    @if (isAdd)
+                    {
+                        @Html.ActionLink("Add New Tracker", "Tracker", "Tracker", null, new { @class = "btn btn-primary" })
+                    }
+                    @if (isDelete)
+                    {
+                        <input class="btn btn-danger" id="btnDeleteTracker" name="inputDelete" type="button" value="Delete Tracker" tabindex="3" title='Delete Tracker' />
+                    }
+
+                </div>
+            </div>
+
+            <div class="span12 user-contant printContent">
+                <div id="dvTracker">
+                    <table id="tblTracker"></table>
+                    <div id="dvTrackerFooter"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/Utility/TrackerView.js?v=@DateTime.Now.Ticks"></script>

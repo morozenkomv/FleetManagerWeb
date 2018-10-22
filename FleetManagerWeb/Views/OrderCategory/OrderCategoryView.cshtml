@@ -1,0 +1,58 @@
+@{
+    ViewBag.Title = "Order Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isAdd = Convert.ToBoolean(ViewData["blAddRights"]);
+    bool isEdit = Convert.ToBoolean(ViewData["blEditRights"]);
+    bool isDelete = Convert.ToBoolean(ViewData["blDeleteRights"]);
+    bool isExport = Convert.ToBoolean(ViewData["blExportRights"]);
+}
+@using (Html.BeginForm("OrderCategory", "OrderCategory", FormMethod.Post, new { @id = "frmOrderCategory", @class = "form_validation_ttip well stdform" }))
+{
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        @Html.Hidden("hfAdd", @isAdd)
+        @Html.Hidden("hfEdit", @isEdit)
+        @Html.Hidden("hfDelete", @isDelete)
+        @Html.Hidden("hfExport", @isExport)
+
+        <div class="panel-body pan">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <div class="row search-label">
+                        <label class="control-label col-md-3">
+                            Search
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" id="txtSearch" class="form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 text-right">
+                    <label class="control-label">
+                        &nbsp;
+                    </label>
+                    @if (isAdd)
+                    {
+                        @Html.ActionLink("Add Order Category", "OrderCategory", "OrderCategory", null, new { @class = "btn btn-primary" })
+                    }
+                    @if (isDelete)
+                    {
+                        <input class="btn btn-danger" id="btnDelete" name="inputDelete" type="button" value="Delete" tabindex="3" title='Delete' />
+                    }
+                </div>
+            </div>
+            <div class="span12 user-contant">
+                <div id="dvOrderCategory">
+                    <table id="tblOrderCategory"></table>
+                    <div id="dvOrderCategoryFooter"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    var AdminRoleID = '@FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.ADMIN.GetHashCode()';
+</script>
+<script src="~/Scripts/Utility/OrderCategoryView.js?v=@DateTime.Now.Ticks"></script>

@@ -1,0 +1,157 @@
+﻿@model FleetManagerWeb.Models.ClsCompany
+@{
+    ViewBag.Title = "Company";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int UserRoleID = Convert.ToInt32(ViewData["UserRoleID"]);
+    int SYSAdminRoleID = FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.SYSADMIN.GetHashCode();
+}
+
+@using (Html.BeginForm("Company", "Company", FormMethod.Post, new { @id = "frmCompany", @class = "form_validation_ttip well stdform" }))
+{
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        <div class="panel-body pan">
+            <div class="row-fluid">
+                @Html.HiddenFor(m => m.hdniFrame)
+                @Html.HiddenFor(m => m.lgId)
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Short Name
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.strShortName, new { @class = "span11 required alphanumwithspc form-control", @maxlength = "50", @tabindex = "2", @next = "strFullName" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Full Name
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.strFullName, new { @class = "span11 required alphanumwithspc form-control", @maxlength = "100", @tabindex = "3", @next = "intVat" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Vat
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.intVat, new { @class = "span11 required drivernumwospc form-control", @maxlength = "10", @tabindex = "4", @next = "strEmail" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Email
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.strEmail, new { @class = "span11 required emailid form-control", @maxlength = "100", @tabindex = "5", @next = "strPerson" })
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Person
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.strPerson, new { @class = "span11 required alphanumwithspc form-control", @maxlength = "100", @tabindex = "6", @next = "strContact" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Contact
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.strContact, new { @class = "span11 required alphanumwithspc form-control", @maxlength = "100", @tabindex = "7", @next = "strPhone" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Phone
+                        </label>
+                        @Html.TextBoxFor(m => m.strPhone, new { @class = "span11 alphanumwithspc form-control", @maxlength = "100", @tabindex = "8", @next = "strAddress1" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="control-label">
+                        Address1
+                        <span class="f_req">*</span>
+                    </label>
+                    @Html.TextAreaFor(m => m.strAddress1, new { @class = "span11 required alphanumwithspc form-control", @maxlength = "100", @tabindex = "9", @next = "strAddress2" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Address2
+                        </label>
+                        @Html.TextAreaFor(m => m.strAddress2, new { @class = "span11 alphanumwithspc form-control", @maxlength = "100", @tabindex = "10", @next = "strAddress3" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Address3
+                        </label>
+                        @Html.TextAreaFor(m => m.strAddress3, new { @class = "span11 alphanumwithspc form-control", @maxlength = "100", @tabindex = "11", @next = "strAdminUserIds" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Assign Admin User
+                        </label>
+                        @Html.DropDownListFor(m => m.strAdminUserIds, Model.lstAdminuser, new { @class = "span11 form-control", @multiple = "multiple", @tabindex = "12", @next = "btnSubmit" })
+                        <input type="hidden" id="hdnstrAdminUserIds" name="hdnstrAdminUserIds" value="@Model.hdnstrAdminUserIds" />
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12">
+                    @{
+                        if (SYSAdminRoleID == UserRoleID)
+                        {
+                            <input class="btn btn-inverse btn-primary" id="btnSubmit" name="inputSubmit" type="submit" value="Save" tabindex="12" title="Save Company" />
+                        }
+                    }
+                    <input class="btn btn-green cancel" id="btnCancel" name="inputCancel" type="button" value="Cancel" tabindex="13" title="Cancel Company" />
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+                        }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#strAdminUserIds').multiselect({
+            includeSelectAllOption: true,
+            nonSelectedText: 'All User',
+            enableFiltering: true
+        });
+
+        if ($("#lgId").val() > 0) {
+            var values = $("#hdnstrAdminUserIds").val();
+            $.each(values.split(","), function (i, e) {
+                $("#strAdminUserIds option[value='" + e + "']").prop("selected", true);
+            });
+            $("#strAdminUserIds").multiselect("rebuild");
+        }
+    });
+</script>
+<script src="~/Scripts/Utility/Company.js?v=@DateTime.Now.Ticks"></script>

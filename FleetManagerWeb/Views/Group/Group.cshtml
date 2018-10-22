@@ -1,0 +1,124 @@
+﻿@model FleetManagerWeb.Models.ClsGroup
+@{
+    ViewBag.Title = "Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int UserRoleID = Convert.ToInt32(ViewData["UserRoleID"]);
+    int SYSAdminRoleID = FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.SYSADMIN.GetHashCode();
+    int AdminRoleID = FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.ADMIN.GetHashCode();
+}
+@using (Html.BeginForm("Group", "Group", FormMethod.Post, new { @id = "frmGroup", @class = "form_validation_ttip well stdform" }))
+{
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        <div class="panel-body pan">
+            <div class="row-fluid">
+                @Html.HiddenFor(m => m.hdniFrame)
+                @Html.HiddenFor(m => m.lgId)
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Group Name
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.TextBoxFor(m => m.strGroupName, new { @class = "span11 required alphanumwithspc form-control", @maxlength = "200", @tabindex = "2", @next = "lgCompanyId" })
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Parent Group
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.DropDownListFor(m => m.lgParentGroupId, Model.lstGroups, new { @class = "span11 chosen form-control", @tabindex = "3", @next = "lgParentGroupId" })
+                    </div>
+                </div>
+
+                <div class="col-md-3" id="divCompany">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Company
+                            <span class="f_req">*</span>
+                        </label>
+                        @Html.DropDownListFor(m => m.lgCompanyId, Model.lstCompany, new { @class = "span11 chosen form-control", @tabindex = "4", @next = "btnSubmit" })
+                    </div>
+                </div>
+
+                <div class="col-md-3" id="divAdminUser">
+                    <div class="form-group">
+                        <label class="control-label col-md-12">
+                            Users
+                            <span class="f_req">*</span>
+                        </label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.strUserId, Model.lstUsers, new { @class = "span11 required form-control", @multiple = "multiple", @tabindex = "9", @next = "btnSubmit" })
+                            <input type="hidden" id="hdnstrUserIds" name="hdnstrUserIds" value="@Model.hdnstrUserIds" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-12">
+                    @{
+                        if (SYSAdminRoleID == UserRoleID || AdminRoleID == UserRoleID)
+                        {
+                            <input class="btn btn-inverse btn-primary" id="btnSubmit" name="inputSubmit" type="submit" value="Save" tabindex="5" title="Save Group" />
+                        }
+                    }
+                    <input class="btn btn-green cancel" id="btnCancel" name="inputCancel" type="button" value="Cancel" tabindex="6" title="Cancel Group" />
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+                        }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#strUserId').multiselect({
+            includeSelectAllOption: true,
+            nonSelectedText: 'All User',
+            enableFiltering: true
+        });
+
+        SetDefaultDropDown();
+
+        $("#lgParentGroupId").change(function () {
+            SetDefaultDropDown();
+            BindAllUsersByCompany();
+        });
+
+        $("#lgCompanyId").change(function () {
+            BindAllUsersByCompany();
+        });
+
+        if ($("#lgParentGroupId").val() == "" && $("#lgCompanyId").val() == "") {
+            $("#divAdminUser").hide()
+        }
+    });
+
+    function SetDefaultDropDown() {
+        if ($("#lgParentGroupId").val() != "") {
+            $("#divCompany").hide();
+        }
+        else {
+            $("#divCompany").show();
+        }
+
+        if ($("#hdnstrUserIds").val() != "") {
+            var values = $("#hdnstrUserIds").val();
+            $.each(values.split(","), function (i, e) {
+                $("#strUserId option[value='" + e + "']").prop("selected", true);
+            });
+            $("#strUserId").multiselect("rebuild");
+        }
+    }
+</script>
+<script src="~/Scripts/Utility/Group.js?v=@DateTime.Now.Ticks"></script>

@@ -1,0 +1,45 @@
+@{
+    ViewBag.Title = "Inbox";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isDelete = Convert.ToBoolean(ViewData["blDeleteRights"]);
+}
+@using (Html.BeginForm("Mail", "Inbox", FormMethod.Post, new { @id = "frmInbox", @class = "form_validation_ttip well stdform" }))
+{
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        @Html.Hidden("hfDelete", @isDelete)
+
+        <div class="panel-body pan">
+            <div class="row form-group">
+                <div class="col-md-3">
+                    <div class="row search-label">
+                        <label class="control-label col-md-3">
+                            Search
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" id="txtSearch" class="form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 text-right">
+                    <label class="control-label">
+                        &nbsp;
+                    </label>
+                    @if (isDelete)
+                    {
+                        <input class="btn btn-danger" id="btnDelete" name="btnDelete" type="button" value="Delete" tabindex="2" title='Delete' />
+                    }
+                </div>
+            </div>
+            <div class="span12 mail-contant">
+                <div id="dvUser">
+                    <table id="tblMail"></table>
+                    <div id="dvMailFooter"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/Utility/Inbox.js?v=@DateTime.Now.Ticks"></script>

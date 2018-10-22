@@ -1,0 +1,126 @@
+@{
+    ViewBag.Title = "Tracker Formatted Print";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int UserRoleID = Convert.ToInt32(ViewData["UserRoleID"]);
+    int SYSAdminRoleID = FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.SYSADMIN.GetHashCode();
+    int AdminRoleID = FleetManagerWeb.Common.Enum.USER_ADMIN_ROLES.ADMIN.GetHashCode();
+}
+
+@using (Html.BeginForm("TrackerFormattedPrint", "Tracker", FormMethod.Post, new { @id = "frmTracker", @class = "form_validation_ttip well stdform" }))
+{
+
+    <div class="panel panel-grey">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        <div class="panel-body pan">
+            <div class="row form-group">
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Trip Start
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="txtTripStartDateSearch" class="date form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Trip End
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" id="txtTripEndDateSearch" class="date form-control" tabindex="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row search-label">
+                        <label class="control-label col-md-4">
+                            Car
+                        </label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("ddlCar", (List<SelectListItem>)ViewData["lstCar"], new { @class = "required form-control", @tabindex = "1", @id = "ddlCar" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-9 text-right">
+                    <label class="control-label">
+                        &nbsp;
+                    </label>
+                    <input class="btn btn-primary" id="btnGenerateReport" name="btnGenerateReport" type="button" value="Generate Report" tabindex="3" title='Generate Report' />
+                    <input class="btn btn-primary print" id="btnPrint" name="btnPrint" type="button" value="Print" title="Print" style="display:none" />
+                </div>
+            </div>
+            <div id="dvReport" class="printContent" style="display:none">
+                <div class="row">
+                    <div class="col-md-6">
+                        EWIDENCJA PRZEBIEGU POJAZDU JUPOL-CAR SP.Z.O.O
+                    </div>
+                    <div class="col-md-6 right">
+                        @DateTime.Now.ToString("dd MMM yyyy HH:mm")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        Car Description : <span id="ltrCarDescription"></span>
+                    </div>
+                    <div class="col-md-6 right">
+                        Prepared by: @ViewData["UserName"]
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        KM Driven : <span id="ltrKmDriven"></span>
+                    </div>
+                    <div class="col-md-6 right">
+                        Verified with Wizard automatically
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Date Range : <span id="ltrDateRange"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table table-responsive table-bordered">
+                            <table id="tblData" width="100%" border="1">
+                                <tr>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                    <th>Place Start</th>
+                                    <th>Place End</th>
+                                    <th>Reason</th>
+                                    <th>Remarks</th>
+                                    <th>Km Start</th>
+                                    <th>Km End</th>
+                                    <th>Km Driven</th>
+                                </tr>
+                                <tr>
+                                    <td>Date Start</td>
+                                    <td>Date End</td>
+                                    <td>Place Start</td>
+                                    <td>Place End</td>
+                                    <td>Reason</td>
+                                    <td>Remarks</td>
+                                    <td>Km Start</td>
+                                    <td>Km End</td>
+                                    <td>Km Driven</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/Utility/TrackerFormattedPrint.js?v=@DateTime.Now.Ticks"></script>

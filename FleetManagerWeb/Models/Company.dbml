@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FleetManager" Class="CompanyDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-PM1UQH7;Initial Catalog=FleetManager;Integrated Security=False;User ID=sa;Pooling=False;Asynchronous Processing=True;MultipleActiveResultSets=False;Application Name=FleetManager" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FleetManagerConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Company" Member="Companies">
+    <Type Name="Company">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address3" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Vat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Person" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DeletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeletedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.InsertOrUpdateCompany" Method="InsertOrUpdateCompany">
+    <Parameter Name="Id" Parameter="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ShortName" Parameter="shortName" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="FullName" Parameter="fullName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Address1" Parameter="address1" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Address2" Parameter="address2" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Address3" Parameter="address3" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Vat" Parameter="vat" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="Person" Parameter="person" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Contact" Parameter="contact" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Phone" Parameter="phone" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="AdminUserIds" Parameter="adminUserIds" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="PageId" Parameter="pageId" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="InsertOrUpdateCompanyResult">
+      <Column Name="InsertedId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.DeleteCompany" Method="DeleteCompany">
+    <Parameter Name="IdList" Parameter="idList" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="DeletedBy" Parameter="deletedBy" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="PageId" Parameter="pageId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="UserPageId" Parameter="userPageId" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="DeleteCompanyResult">
+      <Column Name="TotalReference" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetCompanyByUser" Method="GetCompanyByUser">
+    <Parameter Name="Rows" Parameter="rows" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Page" Parameter="page" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Search" Parameter="search" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="Sort" Parameter="sort" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="GetCompanyByUserResult">
+      <Column Name="CompanyId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Vat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Person" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetCompanyAll" Method="GetCompanyAll">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="SysAdminRoleId" Parameter="sysAdminRoleId" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="GetCompanyAllResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address3" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Vat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Person" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="AdminUserIds" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SearchCompany" Method="SearchCompany">
+    <Parameter Name="Rows" Parameter="rows" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Page" Parameter="page" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Search" Parameter="search" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="Sort" Parameter="sort" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="RoleId" Parameter="roleId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SYSAdminRoleId" Parameter="sYSAdminRoleId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AdminRoleId" Parameter="adminRoleId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SearchCompanyResult">
+      <Column Name="RowNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address3" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Vat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Person" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="AdminUserIds" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CompanyID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetCompanyListForTracker" Method="GetCompanyListForTracker">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="SysAdminRoleID" Parameter="sysAdminRoleID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AdminRoleID" Parameter="adminRoleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetCompanyListForTrackerResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="AdminUserId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetCompanyById" Method="GetCompanyById">
+    <Parameter Name="Id" Parameter="id" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="GetCompanyByIdResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address3" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Vat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Person" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Contact" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="AdminUserIds" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetCompanyListForGroup" Method="GetCompanyListForGroup">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="SysAdminRoleID" Parameter="sysAdminRoleID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AdminRoleID" Parameter="adminRoleID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetCompanyListForGroupResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>
