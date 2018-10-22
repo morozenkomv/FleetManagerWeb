@@ -16,11 +16,13 @@
         public int inId { get; set; }
         public int inCarId { get; set; }
         public int inCarIdForRegistration { get; set; }
+        public int inCodeId { get; set; }
         public long lgReasonId { get; set; }
         public List<SelectListItem> lstTripReason { get; set; }
         public List<ClsTracker> listTracker { get; set; }
         public List<SelectListItem> lstCar { get; set; }
         public List<SelectListItem> lstRegisteration { get; set; }
+        public List<SelectListItem> lstCode { get; set; }
 
         public string strTripStart { get; set; }
 
@@ -113,7 +115,7 @@
             return objClsTracker;
         }
 
-        public int SaveTracker(ClsTracker objSave)
+        public int SaveTracker(ClsTracker objSave, ClsCarFleet clsCarFleet)
         {
             try
             {
@@ -121,7 +123,14 @@
                 {
                     using (this.objDataContext = new TrackerDataContext(Functions.StrConnection))
                     {
-                        var result = this.objDataContext.InsertOrUpdateTracker(objSave.inId, objSave.strTripStart, objSave.strTripEnd, objSave.strLocationStart, objSave.strLocationEnd, objSave.strReasonRemarks, objSave.inKmStart, objSave.inKmEnd, objSave.inKmDriven, objSave.inFuelStart, objSave.inFuelEnd, mySession.Current.UserId, objSave.strEntryMethod, true, objSave.blActive, PageMaster.Tracker.ToString().intSafe(), objSave.inCarId, objSave.lgReasonId, null, null, objSave.lgCompanyId).FirstOrDefault();
+                        var result = this.objDataContext.InsertOrUpdateTracker(objSave.inId, objSave.strTripStart,
+                            objSave.strTripEnd, objSave.strLocationStart, objSave.strLocationEnd, 
+                            objSave.strReasonRemarks, objSave.inKmStart, objSave.inKmEnd, objSave.inKmDriven,
+                            objSave.inFuelStart, objSave.inFuelEnd, mySession.Current.UserId, objSave.strEntryMethod,
+                            true, objSave.blActive, PageMaster.Tracker.ToString().intSafe(), objSave.inCarId, 
+                            objSave.lgReasonId, null, null, objSave.lgCompanyId, clsCarFleet.strReg, clsCarFleet.strCode)
+                            .FirstOrDefault();
+
                         if (result != null)
                         {
                             objSave.inId = result.InsertedId;

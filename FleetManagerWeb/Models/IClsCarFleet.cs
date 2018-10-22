@@ -1,6 +1,7 @@
 namespace FleetManagerWeb.Models
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
 
     public interface IClsCarFleet
@@ -16,5 +17,6 @@ namespace FleetManagerWeb.Models
 
         List<SelectListItem> GetAllCarFleetForDropDown();
         List<SelectListItem> GetAllCarFleetRegisterationForDropDown();
+        Task<List<SelectListItem>> GetAllCarFleetCodeForDropDown();
     }
 }

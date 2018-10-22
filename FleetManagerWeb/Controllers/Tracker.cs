@@ -34,7 +34,7 @@
                     //objClsTracker.lstGroup = this.objiClsGroup.GetGroupByCompanyId(CompanyId).ToList();
                     objClsTracker.lstCar = this.objiClsCarFleet.GetAllCarFleetForDropDown().ToList();
                     objClsTracker.lstRegisteration = this.objiClsCarFleet.GetAllCarFleetRegisterationForDropDown().ToList();
-
+                    objClsTracker.lstCode = this.objiClsCarFleet.GetAllCarFleetCodeForDropDown().GetAwaiter().GetResult().ToList();
                 }
                 else
                 {
@@ -43,6 +43,7 @@
                     //objClsTracker.lstGroup = new List<SelectListItem>();
                     objClsTracker.lstCar = new List<SelectListItem>();
                     objClsTracker.lstRegisteration = new List<SelectListItem>();
+                    objClsTracker.lstCode = new List<SelectListItem>();
                 }
             }
             catch (Exception ex)
@@ -245,7 +246,8 @@
                 }
                 else
                 {
-                    objTracker.inId = this.objiClsTracker.SaveTracker(objTracker);
+                    var carFleet = objiClsCarFleet.GetCarFleetByCarFleetId((long)objTracker.inCarId);
+                    objTracker.inId = this.objiClsTracker.SaveTracker(objTracker, carFleet);
                     if (objTracker.inId > 0)
                     {
                         this.ViewData["Success"] = "1";

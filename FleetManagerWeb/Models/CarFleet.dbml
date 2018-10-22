@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FleetManager" Class="CarFleetDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=NISHANT\SQL2016EXPRESS;Initial Catalog=FleetManager;Integrated Security=True;Pooling=False;Asynchronous Processing=True;MultipleActiveResultSets=False;Application Name=FleetManager" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FleetManagerConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSqlLocaldb;Initial Catalog=FleetManager;Integrated Security=True;Pooling=False;Asynchronous Processing=True;MultipleActiveResultSets=False;Application Name=FleetManager" SettingsObjectName="FleetManagerWeb.Properties.Settings" SettingsPropertyName="FleetManagerConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CarFleet" Member="CarFleets">
     <Type Name="CarFleet">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -43,13 +43,13 @@
       <Column Name="Code" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="Reg" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Color_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Color_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Fuel_Type" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
       <Column Name="Last_Trip" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
       <Column Name="Last_Km" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Last_Location" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="FleetModels_Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="FleetMakes_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FleetMakes_Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Make" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="Model" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="Id_1" Type="System.Int32" DbType="Int" CanBeNull="true" />

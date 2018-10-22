@@ -12,10 +12,17 @@ $(document).ready(function () {
 
     $('#inCarIdForRegistration').on('change', function () {
         $('#inCarId').val($('#inCarIdForRegistration').val());
+        $('#inCodeId').val($('#inCarIdForRegistration').val());
     });
 
     $('#inCarId').on('change', function () {
         $('#inCarIdForRegistration').val($('#inCarId').val());
+        $('#inCodeId').val($('#inCarId').val());
+    });
+
+    $('#inCodeId').on('change', function () {
+        $('#inCarIdForRegistration').val($('#inCodeId').val());
+        $('#inCarId').val($('#inCodeId').val());
     });
 
     $('#btnSubmit').click(function () {  

@@ -36,7 +36,7 @@ namespace FleetManagerWeb.Models
     #endregion
 		
 		public CarFleetDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["FleetManagerConnectionString"].ConnectionString, mappingSource)
+				base(global::FleetManagerWeb.Properties.Settings.Default.FleetManagerConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -101,7 +101,7 @@ namespace FleetManagerWeb.Models
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Code", DbType="NVarChar(10)")] string code, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Reg", DbType="NVarChar(10)")] string reg, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Desc", DbType="NVarChar(50)")] string desc, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Color_Id", DbType="Int")] System.Nullable<int> color_Id, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Color_Id", DbType="Int")] System.Nullable<long> color_Id, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Fuel_Type", DbType="NVarChar(1)")] string fuel_Type, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Last_Trip", DbType="NVarChar(30)")] string last_Trip, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Last_Km", DbType="Int")] System.Nullable<int> last_Km, 
@@ -661,7 +661,7 @@ namespace FleetManagerWeb.Models
 		
 		private string _Description;
 		
-		private int _Color_Id;
+		private long _Color_Id;
 		
 		private string _Fuel_Type;
 		
@@ -673,7 +673,7 @@ namespace FleetManagerWeb.Models
 		
 		private System.Nullable<long> _FleetModels_Id;
 		
-		private System.Nullable<int> _FleetMakes_Id;
+		private System.Nullable<long> _FleetMakes_Id;
 		
 		private string _Make;
 		
@@ -767,8 +767,8 @@ namespace FleetManagerWeb.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color_Id", DbType="Int NOT NULL")]
-		public int Color_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color_Id", DbType="BigInt NOT NULL")]
+		public long Color_Id
 		{
 			get
 			{
@@ -863,8 +863,8 @@ namespace FleetManagerWeb.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FleetMakes_Id", DbType="Int")]
-		public System.Nullable<int> FleetMakes_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FleetMakes_Id", DbType="BigInt")]
+		public System.Nullable<long> FleetMakes_Id
 		{
 			get
 			{

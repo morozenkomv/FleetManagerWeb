@@ -9,7 +9,7 @@ namespace FleetManagerWeb.Models
 
         ClsTracker GetTrackerByTrackerId(long lgTrackerId);
 
-        int SaveTracker(ClsTracker objSave);
+        int SaveTracker(ClsTracker objSave, ClsCarFleet clsCarFleet);
 
         List<SearchTrackerResult> SearchTracker(int inRow, int inPage, string strSearch, string strSort, string strTripStartDate, string strTripEndDate, string strLocationStart, string strLocationEnd);
 

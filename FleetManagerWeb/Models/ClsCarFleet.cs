@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Transactions;
     using System.Web.Mvc;
     using FleetManagerWeb.Common;
@@ -16,7 +17,7 @@
         public string strCode { get; set; }
         public string strReg { get; set; }
         public string strDesc { get; set; }
-        public int inColor_Id { get; set; }
+        public long inColor_Id { get; set; }
         public string strFuel_Type { get; set; }
         public string strLast_Trip { get; set; }
         public int inLast_Km { get; set; }
@@ -193,6 +194,28 @@
             }
 
             return lstCarFleet;
+        }
+
+        public Task<List<SelectListItem>> GetAllCarFleetCodeForDropDown()
+        {
+            List<SelectListItem> lstCarFleet = new List<SelectListItem>();
+            try
+            {
+                using (this.objDataContext = new CarFleetDataContext(Functions.StrConnection))
+                {
+                    lstCarFleet.Add(new SelectListItem { Text = "--Select--", Value = string.Empty });
+                    List<GetCarFleetAllResult> lstCarFleetResult = this.objDataContext.GetCarFleetAll().ToList();
+                    if (lstCarFleetResult != null && lstCarFleetResult.Count > 0)
+                        foreach (var item in lstCarFleetResult)
+                            lstCarFleet.Add(new SelectListItem { Text = item.Code, Value = item.ID.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                Functions.Write(ex, System.Reflection.MethodBase.GetCurrentMethod().Name, PageMaster.TripReason, mySession.Current.UserId);
+            }
+
+            return Task.FromResult(lstCarFleet);
         }
     }
 }

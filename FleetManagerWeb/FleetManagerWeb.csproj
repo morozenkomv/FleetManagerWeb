@@ -2329,8 +2329,8 @@
     </Content>
     <Content Include="Models\Tracker.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Tracker.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Tracker.designer.cs</LastGenOutput>
     </Content>
     <Content Include="Models\CarFleet.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>

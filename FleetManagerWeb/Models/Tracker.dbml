@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FleetManager" Class="TrackerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=NISHANT\SQL2016EXPRESS;Initial Catalog=FleetManager;Integrated Security=True;Pooling=False;Asynchronous Processing=True;MultipleActiveResultSets=False;Application Name=FleetManager" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FleetManagerConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSqlLocaldb;Initial Catalog=FleetManager;Integrated Security=True;Pooling=False;Asynchronous Processing=True;MultipleActiveResultSets=False;Application Name=FleetManager" SettingsObjectName="FleetManagerWeb.Properties.Settings" SettingsPropertyName="FleetManagerConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Tracker" Member="Trackers">
     <Type Name="Tracker">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -26,7 +26,8 @@
       <Column Name="DeletedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DeletedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CompanyId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Registration" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Registration" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="CarCode" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.CountTracker" Method="CountTracker">
@@ -206,6 +207,8 @@
     <Parameter Name="Id_1" Parameter="id_1" Type="System.Int32" DbType="Int" />
     <Parameter Name="Id_1_1" Parameter="id_1_1" Type="System.Int32" DbType="Int" />
     <Parameter Name="CompanyId" Parameter="companyId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Registration" Parameter="registration" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="CarCode" Parameter="carCode" Type="System.String" DbType="NVarChar(100)" />
     <ElementType Name="InsertOrUpdateTrackerResult">
       <Column Name="InsertedId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>

@@ -36,7 +36,7 @@ namespace FleetManagerWeb.Models
     #endregion
 		
 		public TrackerDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["FleetManagerConnectionString1"].ConnectionString, mappingSource)
+				base(global::FleetManagerWeb.Properties.Settings.Default.FleetManagerConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -144,9 +144,11 @@ namespace FleetManagerWeb.Models
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Reason_Id", DbType="BigInt")] System.Nullable<long> reason_Id, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id_1", DbType="Int")] System.Nullable<int> id_1, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id_1_1", DbType="Int")] System.Nullable<int> id_1_1, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CompanyId", DbType="BigInt")] System.Nullable<long> companyId)
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CompanyId", DbType="BigInt")] System.Nullable<long> companyId, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Registration", DbType="NVarChar(100)")] string registration, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CarCode", DbType="NVarChar(100)")] string carCode)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, trip_Start, trip_End, location_Start, location_End, reason_Remarks, km_Start, km_End, km_Driven, fuel_Start, fuel_End, user_Id, entry_Method, editable, active, pageId, car_Id, reason_Id, id_1, id_1_1, companyId);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, trip_Start, trip_End, location_Start, location_End, reason_Remarks, km_Start, km_End, km_Driven, fuel_Start, fuel_End, user_Id, entry_Method, editable, active, pageId, car_Id, reason_Id, id_1, id_1_1, companyId, registration, carCode);
 			return ((ISingleResult<InsertOrUpdateTrackerResult>)(result.ReturnValue));
 		}
 	}
@@ -207,6 +209,8 @@ namespace FleetManagerWeb.Models
 		
 		private string _Registration;
 		
+		private string _CarCode;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -261,6 +265,8 @@ namespace FleetManagerWeb.Models
     partial void OnCompanyIdChanged();
     partial void OnRegistrationChanging(string value);
     partial void OnRegistrationChanged();
+    partial void OnCarCodeChanging(string value);
+    partial void OnCarCodeChanged();
     #endregion
 		
 		public Tracker()
@@ -748,7 +754,7 @@ namespace FleetManagerWeb.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Registration", DbType="NVarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Registration", DbType="NChar(100)")]
 		public string Registration
 		{
 			get
@@ -764,6 +770,26 @@ namespace FleetManagerWeb.Models
 					this._Registration = value;
 					this.SendPropertyChanged("Registration");
 					this.OnRegistrationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarCode", DbType="NChar(100)")]
+		public string CarCode
+		{
+			get
+			{
+				return this._CarCode;
+			}
+			set
+			{
+				if ((this._CarCode != value))
+				{
+					this.OnCarCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CarCode = value;
+					this.SendPropertyChanged("CarCode");
+					this.OnCarCodeChanged();
 				}
 			}
 		}

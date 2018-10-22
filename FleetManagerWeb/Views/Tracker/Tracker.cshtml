@@ -17,7 +17,7 @@
                 @Html.HiddenFor(m => m.inId)
             </div>
             <div class="row form-group">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label class="control-label">
                             Registration<span class="f_req">*</span>
@@ -33,7 +33,23 @@
                         }
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Code <span class="f_req">*</span>
+                        </label>
+                        @if (Model.inId > 0)
+                        {
+                            @Html.DropDownListFor(m => m.inCodeId, Model.lstCode, new { @class = "span11  required disabled form-control", @tabindex = "2", @disabled = "disabled", @next = "lgCompanyId" })
+                            @Html.HiddenFor(m => m.inCodeId)
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(m => m.inCodeId, Model.lstCode, new { @class = "span11  required form-control", @tabindex = "2", @next = "lgCompanyId" })
+                        }
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <div class="form-group">
                         <label class="control-label">
                             Car <span class="f_req">*</span>
