@@ -31,7 +31,7 @@ jQuery(document).ready(function () {
                     $("#ltrCarDescription").html(Data.Data[0].Desc);
                     $("#ltrKmDriven").html(Data.KMDriven);
                     $("#ltrDateRange").html(formatDate($("#txtTripStartDateSearch").val()) + ' to ' + formatDate($("#txtTripEndDateSearch").val()));
-                    var row = $("#tblData tr:last-child").removeAttr("style").clone(true);
+                    var row = $("#tblData tr:last-child").removeAttr("style").removeClass().clone(true);
                     $("#tblData tr").not($("#tblData tr:first-child")).remove();
                     $.each(Data.Data, function () {
                         var d = this;
@@ -44,10 +44,20 @@ jQuery(document).ready(function () {
                         $("td", row).eq(6).html(d.Km_Start);
                         $("td", row).eq(7).html(d.Km_End);
                         $("td", row).eq(8).html(d.Km_Driven);
+
+                        if (!d.IsValid)
+                            $(row).addClass('invalid');
+
                         $("#tblData").append(row);
                         row = $("#tblData tr:last-child").clone(true);
                     });
-                    $("#btnPrint").show();
+
+                    if (Data.IsValid) {
+                        $("#btnPrint").show();
+                    } else {
+                        jAlert('You trips is not valid');
+                    }                       
+
                     $("#dvReport").show();
                 }
             },

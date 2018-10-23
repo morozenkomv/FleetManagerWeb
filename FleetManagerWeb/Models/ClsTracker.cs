@@ -228,4 +228,19 @@
             }
         }
     }
+
+    public class TrackerFormattedModel
+    {
+        public string Desc { get; set; }
+        public string Trip_Start { get; set; }
+        public string Trip_End { get; set; }
+        public string Location_Start { get; set; }
+        public string Location_End { get; set; }
+        public string TripReasonName { get; set; }
+        public string Reason_Remarks { get; set; }
+        public int Km_Start { get; set; }
+        public int Km_End { get; set; }
+        public int Km_Driven { get; set; }
+        public bool IsValid { get; set; }
+    }
 }

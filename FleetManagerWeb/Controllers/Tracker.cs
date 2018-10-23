@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using FleetManagerWeb.Common;
+    using FleetManagerWeb.Extensions;
     using FleetManagerWeb.Models;
 
     public class TrackerController : Controller
@@ -177,6 +178,8 @@
 
                         lgTrackerId = this.Request.QueryString.ToString().Decode().longSafe();
                         objClsTracker = this.objiClsTracker.GetTrackerByTrackerId(lgTrackerId);
+                        objClsTracker.inCodeId = objClsTracker.inCarId;
+                        objClsTracker.inCarIdForRegistration = objClsTracker.inCarId;
                     }
                 }
                 else
@@ -315,22 +318,12 @@
                 List<GenerateTrackerFormattedReportResult> lstTracker = this.objiClsTracker.GenerateTrackerFormattedReport(tripStartDate, tripEndDate, carId);
                 if (lstTracker != null)
                 {
+                    var data = lstTracker.ToReportList();
                     return Json(new
                     {
                         KMDriven = lstTracker.Select(x => x.Km_Driven).Sum(),
-                        Data = lstTracker.Select(x => new
-                        {
-                            Desc = x.Desc,
-                            Trip_Start = x.Trip_Start.ToString("dd/MM/yyyy"),
-                            Trip_End = x.Trip_End.ToString("dd/MM/yyyy"),
-                            Location_Start = x.Location_Start,
-                            Location_End = x.Location_End,
-                            TripReasonName = x.TripReasonName,
-                            Reason_Remarks = x.Reason_Remarks,
-                            Km_Start = x.Km_Start,
-                            Km_End = x.Km_End,
-                            Km_Driven = x.Km_Driven
-                        }).ToList()
+                        Data = data,
+                        IsValid = !data.Any(_ => !_.IsValid)
                     });
                 }
                 else
