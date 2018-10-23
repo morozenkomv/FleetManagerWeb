@@ -59,7 +59,10 @@
                 ClsUser objClsUser = this.objiClsUser.ValidateLogin(objLogin.strUserName, objLogin.strPassword.EncryptString());
                 if (objClsUser != null)
                 {
-                    Functions.UpdateCookies(objClsUser.strUserName, objClsUser.strPassword.EncryptString(), objClsUser.lgId.ToString(), objClsUser.strFirstName + " " + objClsUser.strSurName, objLogin.blRememberMe.ToString(), objClsUser.lgRoleId.ToString(), objClsUser.lgBranchId.ToString(), "true", objClsUser.intSessionDurationHour);
+                    Functions.UpdateCookies(objClsUser.strUserName, objClsUser.strPassword.EncryptString(), 
+                        objClsUser.lgId.ToString(), objClsUser.strFirstName + " " + objClsUser.strSurName, 
+                        objLogin.blRememberMe.ToString(), objClsUser.lgRoleId.ToString(), objClsUser.lgBranchId.ToString(), 
+                        "true", objClsUser.intSessionDurationHour, objClsUser.strFirstName, objClsUser.strSurName);
                     //objClsUser.blIsLogin = true;
                     //this.objiClsUser.SaveUser(objClsUser);
                 }
@@ -169,7 +172,11 @@
                 if (mySession.Current.Password == strCurrentPwd.EncryptString())
                 {
                     ClsUser objUser = this.objiClsUser.ChangePassword(mySession.Current.UserId, strNewPwd);
-                    Functions.UpdateCookies(mySession.Current.UserName, strNewPwd.EncryptString(), mySession.Current.UserId.ToString(), mySession.Current.Fullname, mySession.Current.Rememberme, mySession.Current.RoleId.ToString(), mySession.Current.BranchId.ToString(), "false", mySession.Current.SessionDurationHour);
+                    Functions.UpdateCookies(mySession.Current.UserName, strNewPwd.EncryptString(), mySession.Current.UserId.ToString(),
+                        mySession.Current.Fullname, mySession.Current.Rememberme, mySession.Current.RoleId.ToString(), 
+                        mySession.Current.BranchId.ToString(), "false", mySession.Current.SessionDurationHour,
+                        objUser.strFirstName, objUser.strSurName);
+
                     return this.Json("Success", JsonRequestBehavior.AllowGet);
                 }
                 else

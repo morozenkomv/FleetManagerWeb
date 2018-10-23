@@ -442,7 +442,9 @@
             }
         }
 
-        public static void UpdateCookies(string strUserName, string strPassword, string strUserId, string strFullName, string strRemember, string strRoleId, string strBranchId, string strUserOneTimeLogin,int intSessionDurationHour)
+        public static void UpdateCookies(string strUserName, string strPassword, string strUserId, string strFullName, 
+            string strRemember, string strRoleId, string strBranchId, string strUserOneTimeLogin,
+            int intSessionDurationHour, string firstname, string lastname)
         {
             try
             {
@@ -462,6 +464,8 @@
                 hcUser.Values["branchid"] = strBranchId;
                 hcUser.Values["useronetimelogin"] = strUserOneTimeLogin;
                 hcUser.Values["SessionDurationHour"] = Convert.ToString(intSessionDurationHour);
+                hcUser.Values["firstname"] = firstname;
+                hcUser.Values["lastname"] = lastname;
                 hcUser.Expires = DateTime.Now.AddHours(intSessionDurationHour);
                 HttpContext.Current.Response.Cookies.Add(hcUser);
             }

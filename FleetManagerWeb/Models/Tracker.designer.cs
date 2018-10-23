@@ -125,8 +125,8 @@ namespace FleetManagerWeb.Models
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertOrUpdateTracker")]
 		public ISingleResult<InsertOrUpdateTrackerResult> InsertOrUpdateTracker(
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id", DbType="Int")] System.Nullable<int> id, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Trip_Start", DbType="NVarChar(12)")] string trip_Start, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Trip_End", DbType="NVarChar(12)")] string trip_End, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Trip_Start", DbType="NVarChar(30)")] string trip_Start, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Trip_End", DbType="NVarChar(30)")] string trip_End, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Location_Start", DbType="NVarChar(100)")] string location_Start, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Location_End", DbType="NVarChar(100)")] string location_End, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Reason_Remarks", DbType="NVarChar(200)")] string reason_Remarks, 
@@ -146,9 +146,11 @@ namespace FleetManagerWeb.Models
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Id_1_1", DbType="Int")] System.Nullable<int> id_1_1, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CompanyId", DbType="BigInt")] System.Nullable<long> companyId, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Registration", DbType="NVarChar(100)")] string registration, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CarCode", DbType="NVarChar(100)")] string carCode)
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CarCode", DbType="NVarChar(100)")] string carCode, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="NVarChar(100)")] string firstName, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastName", DbType="NVarChar(100)")] string lastName)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, trip_Start, trip_End, location_Start, location_End, reason_Remarks, km_Start, km_End, km_Driven, fuel_Start, fuel_End, user_Id, entry_Method, editable, active, pageId, car_Id, reason_Id, id_1, id_1_1, companyId, registration, carCode);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, trip_Start, trip_End, location_Start, location_End, reason_Remarks, km_Start, km_End, km_Driven, fuel_Start, fuel_End, user_Id, entry_Method, editable, active, pageId, car_Id, reason_Id, id_1, id_1_1, companyId, registration, carCode, firstName, lastName);
 			return ((ISingleResult<InsertOrUpdateTrackerResult>)(result.ReturnValue));
 		}
 	}
@@ -211,6 +213,10 @@ namespace FleetManagerWeb.Models
 		
 		private string _CarCode;
 		
+		private string _FirstName;
+		
+		private string _LastName;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -267,6 +273,10 @@ namespace FleetManagerWeb.Models
     partial void OnRegistrationChanged();
     partial void OnCarCodeChanging(string value);
     partial void OnCarCodeChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
     #endregion
 		
 		public Tracker()
@@ -790,6 +800,46 @@ namespace FleetManagerWeb.Models
 					this._CarCode = value;
 					this.SendPropertyChanged("CarCode");
 					this.OnCarCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NChar(100)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NChar(100)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
 				}
 			}
 		}

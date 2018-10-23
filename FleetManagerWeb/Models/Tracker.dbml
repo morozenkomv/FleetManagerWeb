@@ -28,6 +28,8 @@
       <Column Name="CompanyId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="Registration" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
       <Column Name="CarCode" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.CountTracker" Method="CountTracker">
@@ -187,8 +189,8 @@
   </Function>
   <Function Name="dbo.InsertOrUpdateTracker" Method="InsertOrUpdateTracker">
     <Parameter Name="Id" Parameter="id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Trip_Start" Parameter="trip_Start" Type="System.String" DbType="NVarChar(12)" />
-    <Parameter Name="Trip_End" Parameter="trip_End" Type="System.String" DbType="NVarChar(12)" />
+    <Parameter Name="Trip_Start" Parameter="trip_Start" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Trip_End" Parameter="trip_End" Type="System.String" DbType="NVarChar(30)" />
     <Parameter Name="Location_Start" Parameter="location_Start" Type="System.String" DbType="NVarChar(100)" />
     <Parameter Name="Location_End" Parameter="location_End" Type="System.String" DbType="NVarChar(100)" />
     <Parameter Name="Reason_Remarks" Parameter="reason_Remarks" Type="System.String" DbType="NVarChar(200)" />
@@ -209,6 +211,8 @@
     <Parameter Name="CompanyId" Parameter="companyId" Type="System.Int64" DbType="BigInt" />
     <Parameter Name="Registration" Parameter="registration" Type="System.String" DbType="NVarChar(100)" />
     <Parameter Name="CarCode" Parameter="carCode" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="NVarChar(100)" />
     <ElementType Name="InsertOrUpdateTrackerResult">
       <Column Name="InsertedId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>

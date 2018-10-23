@@ -128,7 +128,8 @@
                             objSave.strReasonRemarks, objSave.inKmStart, objSave.inKmEnd, objSave.inKmDriven,
                             objSave.inFuelStart, objSave.inFuelEnd, mySession.Current.UserId, objSave.strEntryMethod,
                             true, objSave.blActive, PageMaster.Tracker.ToString().intSafe(), objSave.inCarId, 
-                            objSave.lgReasonId, null, null, objSave.lgCompanyId, clsCarFleet.strReg, clsCarFleet.strCode)
+                            objSave.lgReasonId, null, null, objSave.lgCompanyId, clsCarFleet.strReg, clsCarFleet.strCode,
+                            mySession.Current.Firstname, mySession.Current.Lastname)
                             .FirstOrDefault();
 
                         if (result != null)

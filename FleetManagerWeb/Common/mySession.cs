@@ -52,6 +52,32 @@
             }
         }
 
+        public string Firstname
+        {
+            get
+            {
+                if (HttpContext.Current.Request.Cookies[this.StrCookiesName] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies[this.StrCookiesName].Values["fullname"]))
+                {
+                    return HttpContext.Current.Request.Cookies[this.StrCookiesName].Values["firstname"].ToString();
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string Lastname
+        {
+            get
+            {
+                if (HttpContext.Current.Request.Cookies[this.StrCookiesName] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Cookies[this.StrCookiesName].Values["fullname"]))
+                {
+                    return HttpContext.Current.Request.Cookies[this.StrCookiesName].Values["lastname"].ToString();
+                }
+
+                return string.Empty;
+            }
+        }
+
         public string Password
         {
             get
