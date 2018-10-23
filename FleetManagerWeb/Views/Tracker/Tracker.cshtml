@@ -92,7 +92,7 @@
                         <label class="control-label">
                             Trip Start <span class="f_req">*</span>
                         </label>
-                        @Html.TextBoxFor(m => m.strTripStart, new { @class = "span11 required form-control datetimepicker-start", @maxlength = "12", @tabindex = "5", @next = "strTripEnd" })
+                        @Html.TextBoxFor(m => m.strTripStart, new { @class = "span11 required form-control datetimepicker-start", @maxlength = "12", @tabindex = "5", @next = "strTripEnd", autocomplete = "off" })
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -100,9 +100,8 @@
                         <label class="control-label">
                             Trip End <span class="f_req">*</span>
                         </label>
-                        @Html.TextBoxFor(m => m.strTripEnd, new { @class = "span11 required form-control datetimepicker-end", @maxlength = "12", @tabindex = "6", @next = "strLocationStart" })
+                        @Html.TextBoxFor(m => m.strTripEnd, new { @class = "span11 required form-control datetimepicker-end", @maxlength = "12", @tabindex = "6", @next = "strLocationStart", autocomplete = "off" })
                     </div>
-
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
