@@ -46,8 +46,8 @@ $(function () {
     $('.datetimepicker-disable-time').datetimepicker({
         pickTime: false
     });
-    $('.datetimepicker-start').datetimepicker();
-    $('.datetimepicker-end').datetimepicker();
+    $('.datetimepicker-start').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+    $('.datetimepicker-end').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
     $('.datetimepicker-start').on("change.dp",function (e) {
         $('.datetimepicker-end').data("DateTimePicker").setStartDate(e.date);
     });
