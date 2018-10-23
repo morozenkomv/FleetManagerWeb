@@ -191,10 +191,13 @@
                         <ul class="nav nav-second-level">
                             @if (isTripReasonAccess)
                             {
-                                @*<li>
-                                        <a href="~/TripReason/TripReasonView"><span>Application</span></a>
-                                    </li>*@
-                                <li><a href="~/TripReason/TripReasonView"><i class="fa fa-steam"></i><span class="submenu-title">Application</span></a></li>
+                                <li class="dropdown-submenu">
+                                    <a href="#">Application</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/TripReason/TripReasonView">Trip reason</a></li>
+                                        <li><a tabindex="-1" href="~/CostType/CostTypeView">Cost type</a></li>
+                                    </ul>
+                                </li>
                             }
                             @if (isUserAccess || isRoleAccess || isCompanyAccess || isGroupAccess)
                             {
@@ -218,7 +221,7 @@
                                         {
                                             <li><a tabindex="-1" href="~/Group/GroupView">Group</a></li>
                                         }
-                                        
+
                                         @*<li class="dropdown-submenu">
                                                 <a href="#">Even More..</a>
                                                 <ul class="dropdown-menu">

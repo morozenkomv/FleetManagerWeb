@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AdditionalCosts">
+  <DataContextMoniker Name="/AdditionalCostsDataContext" />
+  <nestedChildShapes>
+    <classShape Id="956bcc2e-dba3-4df6-aedc-eef115871fe8" absoluteBounds="2, 2.625, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/AdditionalCostsDataContext/TripCostType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2b8a11de-802c-4fcf-988d-f88cd8b07a53" absoluteBounds="2.015, 3.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8f253b07-a483-4541-a49a-aa1f108f232a" absoluteBounds="4, 4.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/AdditionalCostsDataContext/TrackerTripCost" />
+      <nestedChildShapes>
+        <elementListCompartment Id="21252605-5c1a-4655-9b88-6950a6e20927" absoluteBounds="4.015, 5.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.96875 : 3.81899251302083); (2.96875 : 5.44314697265625); (4 : 5.44314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AdditionalCostsDataContext/TripCostType/TripCostType_TrackerTripCost" />
+      <nodes>
+        <classShapeMoniker Id="956bcc2e-dba3-4df6-aedc-eef115871fe8" />
+        <classShapeMoniker Id="8f253b07-a483-4541-a49a-aa1f108f232a" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

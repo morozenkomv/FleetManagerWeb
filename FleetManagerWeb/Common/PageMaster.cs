@@ -3,7 +3,7 @@ namespace FleetManagerWeb.Common
     using System;
     using System.Linq;
 
-    public class PageMaster
+    public static class PageMaster
     {
         public static readonly long LgCommon = 1;
         public static readonly long Role = 8;
@@ -20,5 +20,12 @@ namespace FleetManagerWeb.Common
         public static readonly long Inbox = 110;
         public static readonly long OrderCategory = 111;
         public static readonly long Order = 112;
+        public static readonly long AdditionalCost = 105;
+    }
+
+    public enum Page
+    {
+        Unset = 0,
+        AdditionalCost = 105
     }
 }

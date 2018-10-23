@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FleetManager" Class="AdditionalCostsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSqlLocaldb;Initial Catalog=FleetManager;Integrated Security=True;Pooling=False;Asynchronous Processing=True;MultipleActiveResultSets=False;Application Name=FleetManager" SettingsObjectName="FleetManagerWeb.Properties.Settings" SettingsPropertyName="FleetManagerConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TripCostType" Member="TripCostTypes">
+    <Type Name="TripCostType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TripCostType_TrackerTripCost" Member="TrackerTripCosts" ThisKey="Id" OtherKey="CostTypeId" Type="TrackerTripCost" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrackerTripCost" Member="TrackerTripCosts">
+    <Type Name="TrackerTripCost">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CostTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cost" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="TripCostType_TrackerTripCost" Member="TripCostType" ThisKey="CostTypeId" OtherKey="Id" Type="TripCostType" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.InsertOrUpdateTripCostType" Method="InsertOrUpdateTripCostType">
+    <Parameter Name="Id" Parameter="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="PageId" Parameter="pageId" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="InsertOrUpdateTripCostTypeResult">
+      <Column Name="InsertedId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SearchCostType" Method="SearchCostType">
+    <Parameter Name="Rows" Parameter="rows" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Page" Parameter="page" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Search" Parameter="search" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="Sort" Parameter="sort" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="SearchCostTypeResult">
+      <Column Name="RowNum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

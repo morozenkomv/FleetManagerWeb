@@ -37,6 +37,8 @@ namespace FleetManagerWeb
             container.RegisterType<IClsMail, ClsMail>();
             container.RegisterType<IClsOrderCategory, ClsOrderCategory>();
             container.RegisterType<IClsOrder, ClsOrder>();
+            container.RegisterType<IClsCostType, ClsCostType>();
+            
             RegisterTypes(container);
             return container;
         }

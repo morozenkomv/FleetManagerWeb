@@ -12,6 +12,11 @@
     {
         private readonly IClsUser objiClsUser = null;
 
+        public HomeController()
+        {
+
+        }
+
         public HomeController(IClsUser objIClsUser)
         {
             this.objiClsUser = objIClsUser;

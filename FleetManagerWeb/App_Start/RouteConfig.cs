@@ -1,7 +1,5 @@
 namespace FleetManagerWeb
 {
-    using System;
-    using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
 
@@ -15,6 +13,12 @@ namespace FleetManagerWeb
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Login", id = UrlParameter.Optional });
+
+            routes.MapRoute(name: "Logout", url: "home/logout",
+                defaults: new { controller = "Home", action = "Logout" });
+
+            routes.MapRoute(name: "PermissionRedirectPage", url: "home/PermissionRedirectPage",
+                defaults: new { controller = "Home", action = "PermissionRedirectPage" });            
         }
     }
 }
